@@ -17,3 +17,13 @@ def user_def_form(req):
     form=user_form()
     return render(req,'user_form.html',{'form':form})
         
+
+def modelform_fun(req):
+    if req.method=='POST':
+        form1=model_form(req.POST)
+        if form1.is_valid():
+            form1.save()
+        return redirect(modelform_fun)
+    else:
+        form=model_form()
+        return render(req,'model_form.html',{'form':form})
